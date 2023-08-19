@@ -1,0 +1,56 @@
+Question:
+Given two tables, Customers and Orders, write a SQL query to retrieve the names of customers who have placed at least two orders.
+
+Tables:
+
+Customers Table:
+
+diff
+
++----+----------+
+| ID | Name     |
++----+----------+
+| 1  | Alice    |
+| 2  | Bob      |
+| 3  | Carol    |
++----+----------+
+Orders Table:
+
+diff
+
++-----+------------+
+| ID  | CustomerID |
++-----+------------+
+| 101 | 1          |
+| 102 | 1          |
+| 103 | 2          |
+| 104 | 3          |
++-----+------------+
+Expected Output:
+
+diff
+
++-------+
+| Name  |
++-------+
+| Alice |
++-------+
+SQL Query:
+
+sql
+
+SELECT c.Name
+FROM Customers c
+JOIN Orders o ON c.ID = o.CustomerID
+GROUP BY c.ID
+HAVING COUNT(o.ID) >= 2;
+
+
+
+Explanation:
+
+We perform an inner join between the Customers and Orders tables on the ID and CustomerID columns, respectively.
+The GROUP BY clause groups the results by the ID of each customer.
+The HAVING clause filters the results to include only those customers who have at least two orders (COUNT(o.ID) >= 2).
+We select the Name column from the Customers table for the final result.
+This query retrieves the names of customers who have placed at least two orders. It demonstrates the usage of JOIN, GROUP BY, and HAVING clauses in SQL queries.
